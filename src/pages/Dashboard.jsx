@@ -230,6 +230,7 @@ export default function Dashboard() {
       </section>
 
       {/* ═══════════════ Charts Row ═══════════════ */}
+      {/* 
       <section className="grid grid-cols-1 lg:grid-cols-2 gap-6 animate-slide-up stagger-4">
         <EmissionChart
           data={categoryData}
@@ -244,6 +245,7 @@ export default function Dashboard() {
           height={280}
         />
       </section>
+      */}
 
       {/* ═══════════════ Active Goals ═══════════════ */}
       <section className="animate-slide-up stagger-5">

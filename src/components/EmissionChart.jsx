@@ -1,3 +1,4 @@
+import { Component } from 'react';
 import {
   PieChart, Pie, Cell,
   BarChart, Bar,
@@ -6,6 +7,52 @@ import {
   XAxis, YAxis, CartesianGrid,
   Tooltip, ResponsiveContainer, Legend,
 } from 'recharts';
+import ResizeObserverPolyfill from 'resize-observer-polyfill';
+
+// Polyfill structuredClone for older WebViews
+if (typeof window !== 'undefined' && typeof window.structuredClone !== 'function') {
+  window.structuredClone = function (obj) {
+    try {
+      return JSON.parse(JSON.stringify(obj));
+    } catch (e) {
+      return obj;
+    }
+  };
+}
+
+// Polyfill ResizeObserver for older WebViews
+if (typeof window !== 'undefined' && typeof window.ResizeObserver !== 'function') {
+  window.ResizeObserver = ResizeObserverPolyfill;
+}
+
+class ChartErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error("[EmissionChart] Caught error:", error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="flex flex-col items-center justify-center w-full h-full min-h-[200px] bg-white/50 dark:bg-white/5 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-white/10 p-6 text-center">
+          <p className="text-sm font-semibold text-gray-500 dark:text-gray-400">
+            Chart rendering unavailable on this device.
+          </p>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
 
 const defaultColors = ['#10b981', '#06b6d4', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#3b82f6', '#f97316'];
 
@@ -207,9 +254,11 @@ export default function EmissionChart({
         </div>
       )}
 
-      <ResponsiveContainer width="100%" height={height}>
-        {renderChart()}
-      </ResponsiveContainer>
+      <ChartErrorBoundary>
+        <ResponsiveContainer width="100%" height={height}>
+          {renderChart()}
+        </ResponsiveContainer>
+      </ChartErrorBoundary>
     </div>
   );
 }

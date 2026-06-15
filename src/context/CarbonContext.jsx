@@ -154,6 +154,7 @@ function carbonReducer(state, action) {
 }
 
 export function CarbonProvider({ children }) {
+  console.log('[App Init] CarbonProvider rendered');
   const [state, dispatch] = useReducer(carbonReducer, initialState, (initial) => {
     try {
       const saved = localStorage.getItem('carbonwise_state');
@@ -195,8 +196,21 @@ export function CarbonProvider({ children }) {
     if (savedTheme === 'system') {
       const mq = window.matchMedia('(prefers-color-scheme: dark)');
       const handler = () => applyTheme('system');
-      mq.addEventListener('change', handler);
-      return () => mq.removeEventListener('change', handler);
+      
+      // Backward compatibility for older Android Chrome / Safari
+      if (mq.addEventListener) {
+        mq.addEventListener('change', handler);
+      } else if (mq.addListener) {
+        mq.addListener(handler);
+      }
+      
+      return () => {
+        if (mq.removeEventListener) {
+          mq.removeEventListener('change', handler);
+        } else if (mq.removeListener) {
+          mq.removeListener(handler);
+        }
+      };
     }
   }, [state.theme]);
 

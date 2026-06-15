@@ -11,6 +11,8 @@ import Achievements from './pages/Achievements';
 import Report from './pages/Report';
 
 function App() {
+  console.log('[App Init] App.jsx rendered');
+  if (window.logDebug) window.logDebug('App.jsx rendered');
   return (
     <Routes>
       <Route path="/" element={<Layout />}>

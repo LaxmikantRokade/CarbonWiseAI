@@ -195,7 +195,7 @@ export default function EmissionChart({
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full min-w-0 overflow-hidden">
       {(title || subtitle) && (
         <div className="mb-4">
           {title && (

@@ -409,7 +409,7 @@ export default function Leaderboard() {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {/* Radar chart */}
-            <div className="h-72">
+            <div className="h-72 min-w-0 overflow-hidden">
               <ResponsiveContainer width="100%" height="100%">
                 <RadarChart data={radarData}>
                   <PolarGrid stroke="rgba(148,163,184,0.2)" />

@@ -40,7 +40,7 @@ export default function Layout() {
   );
 
   return (
-    <div className="flex w-full h-full bg-gray-50 dark:bg-carbon-950 overflow-hidden">
+    <div className="flex-1 flex w-full bg-gray-50 dark:bg-carbon-950 overflow-hidden">
       {/* ======= Desktop Sidebar ======= */}
       <aside className="hidden md:flex flex-col w-64 shrink-0
         bg-white/70 dark:bg-white/5 backdrop-blur-xl

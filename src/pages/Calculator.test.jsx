@@ -56,4 +56,56 @@ describe('Calculator Page', () => {
     // 100 km * 0.21 (car_gasoline factor) = 21.0 kg
     expect(screen.getByText(/21.00 kg CO₂e/)).toBeInTheDocument();
   });
+
+  it('allows logging an activity', () => {
+    render(
+      <CarbonProvider>
+        <BrowserRouter>
+          <Calculator />
+        </BrowserRouter>
+      </CarbonProvider>
+    );
+
+    const distanceInput = screen.getAllByRole('spinbutton')[0];
+    fireEvent.change(distanceInput, { target: { value: '10' } });
+
+    const logBtn = screen.getByRole('button', { name: /Log /i });
+    fireEvent.click(logBtn);
+  });
+
+  it('allows logging an electricity activity', () => {
+    render(
+      <CarbonProvider>
+        <BrowserRouter>
+          <Calculator />
+        </BrowserRouter>
+      </CarbonProvider>
+    );
+
+    fireEvent.click(screen.getByText('Electricity'));
+    
+    const kwhInput = screen.getAllByRole('spinbutton')[0];
+    fireEvent.change(kwhInput, { target: { value: '200' } });
+
+    const logBtn = screen.getByRole('button', { name: /Log /i });
+    fireEvent.click(logBtn);
+  });
+
+  it('allows logging a waste activity', () => {
+    render(
+      <CarbonProvider>
+        <BrowserRouter>
+          <Calculator />
+        </BrowserRouter>
+      </CarbonProvider>
+    );
+
+    fireEvent.click(screen.getByText('Waste'));
+    
+    const wasteInput = screen.getAllByRole('spinbutton')[0];
+    fireEvent.change(wasteInput, { target: { value: '15' } });
+
+    const logBtn = screen.getByRole('button', { name: /Log /i });
+    fireEvent.click(logBtn);
+  });
 });

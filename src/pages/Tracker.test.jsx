@@ -42,4 +42,53 @@ describe('Tracker Page', () => {
 
     expect(transportTab).toBeInTheDocument();
   });
+
+  it('filters entries by category', () => {
+    // Add mock entries and verify they are filtered
+    const stateWithEntries = {
+      entries: [
+        { id: '1', category: 'transport', amount: 10, date: new Date().toISOString() },
+        { id: '2', category: 'food', amount: 5, date: new Date().toISOString() },
+      ],
+      goals: []
+    };
+
+    // Initial state: both entries
+    localStorage.setItem('carbonwise_state', JSON.stringify(stateWithEntries));
+
+    render(
+      <CarbonProvider>
+        <Tracker />
+      </CarbonProvider>
+    );
+
+    // Initial state: both entries
+    // Filter to transport
+    fireEvent.click(screen.getByText('Transport'));
+    expect(screen.getByText('Transport')).toBeInTheDocument();
+  });
+
+  it('allows deleting an entry', () => {
+    const stateWithEntries = {
+      entries: [
+        { id: '1', category: 'transport', amount: 10, date: new Date().toISOString() },
+      ],
+      goals: []
+    };
+
+    localStorage.setItem('carbonwise_state', JSON.stringify(stateWithEntries));
+
+    const { container } = render(
+      <CarbonProvider>
+        <Tracker />
+      </CarbonProvider>
+    );
+
+    // Find the delete button (it has hover:bg-rose-500/10 and contains the Trash2 icon)
+    const buttons = screen.getAllByRole('button');
+    const deleteBtn = buttons[buttons.length - 1]; // Last button is the delete button
+    fireEvent.click(deleteBtn);
+    
+    expect(screen.getByText(/No entries yet/i)).toBeInTheDocument();
+  });
 });

@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { Trophy, Crown, Medal, Award, Flame, Star, Users, TrendingUp, Filter } from 'lucide-react';
+import leaderboardImg from '../assets/images/leaderboard.png';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, RadarChart, PolarGrid, PolarAngleAxis, Radar, Legend } from 'recharts';
 import { useCarbon } from '../context/CarbonContext';
 import { generateLeaderboard, getPercentile, timeFilters, categoryFilters } from '../data/leaderboardData';
@@ -135,18 +136,20 @@ export default function Leaderboard() {
   return (
     <div className="page-enter space-y-6">
       {/* Header */}
-      <div className="stagger-1 animate-slide-up">
-        <div className="flex items-center gap-3 mb-1">
-          <div className="p-2.5 rounded-xl bg-gradient-to-br from-amber-500 to-orange-500 shadow-lg shadow-amber-500/25">
-            <Trophy className="w-6 h-6 text-white" />
-          </div>
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
+      <div className="stagger-1 animate-slide-up relative glass-card overflow-hidden rounded-3xl p-6 md:p-8 mb-6">
+        <div className="flex flex-col md:flex-row items-center gap-6 relative z-10">
+          <div className="flex-1 space-y-3 text-center md:text-left">
+            <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white flex items-center justify-center md:justify-start gap-3">
+              <Trophy className="w-7 h-7 text-amber-500" />
               Community <span className="text-gradient">Leaderboard</span>
             </h1>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
-              See how you compare with the community
+            <p className="text-gray-600 dark:text-gray-300 max-w-lg mx-auto md:mx-0 text-sm md:text-base">
+              See how you compare with the community, maintain your streak, and climb the eco-ranks.
             </p>
+          </div>
+          <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 relative">
+            <div className="absolute inset-0 bg-amber-500/20 blur-3xl rounded-full" />
+            <img src={leaderboardImg} alt="Leaderboard" className="w-full h-full object-contain relative z-10 animate-float" />
           </div>
         </div>
       </div>

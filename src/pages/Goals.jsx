@@ -16,6 +16,7 @@ import {
   Sparkles,
   ArrowUpCircle,
 } from 'lucide-react';
+import goalsImg from '../assets/images/goals.png';
 import { useCarbon } from '../context/CarbonContext';
 
 /* ─── Suggested goal templates ─── */
@@ -263,16 +264,20 @@ export default function Goals() {
   return (
     <div className="page-enter space-y-8">
       {/* ─── Header ─── */}
-      <div className="animate-slide-up opacity-0 stagger-1">
-        <div className="flex items-center gap-3 mb-2">
-          <div className="p-3 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 shadow-lg shadow-emerald-500/25">
-            <Target className="w-7 h-7 text-white" />
-          </div>
-          <div>
-            <h1 className="text-3xl font-bold text-gradient">Sustainability Goals</h1>
-            <p className="text-slate-500 dark:text-slate-400 text-sm mt-0.5">
-              Set weekly targets and track your eco-friendly progress
+      <div className="animate-slide-up opacity-0 stagger-1 relative glass-card overflow-hidden rounded-3xl p-6 md:p-8">
+        <div className="flex flex-col md:flex-row items-center gap-6 relative z-10">
+          <div className="flex-1 space-y-3 text-center md:text-left">
+            <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white flex items-center justify-center md:justify-start gap-3">
+              <Target className="w-7 h-7 text-emerald-500" />
+              Sustainability <span className="text-gradient">Goals</span>
+            </h1>
+            <p className="text-gray-600 dark:text-gray-300 max-w-lg mx-auto md:mx-0 text-sm md:text-base">
+              Set weekly targets, track your eco-friendly progress, and build sustainable habits over time.
             </p>
+          </div>
+          <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 relative">
+            <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full" />
+            <img src={goalsImg} alt="Goals" className="w-full h-full object-contain relative z-10 animate-float" />
           </div>
         </div>
       </div>

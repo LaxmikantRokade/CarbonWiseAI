@@ -1,5 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Bot, Send, Sparkles } from 'lucide-react';
+import ecoCoachImg from '../assets/images/eco-coach.png';
+import ecoCoachAltImg from '../assets/images/eco-coach-alt.png';
 import { useCarbon } from '../context/CarbonContext';
 import { generateMockCoachResponse, conversationStarters } from '../data/ecoCoach';
 
@@ -32,8 +34,8 @@ function BotMessage({ response }) {
   const colorClass = impactColors[response.impact] || impactColors.info;
   return (
     <div className="flex items-end gap-2 animate-slide-up">
-      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center flex-shrink-0">
-        <Bot className="w-4 h-4 text-white" />
+      <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 overflow-hidden ring-2 ring-emerald-500/20">
+        <img src={ecoCoachAltImg} alt="Coach" className="w-full h-full object-cover" />
       </div>
       <div className={`glass-card p-4 rounded-2xl rounded-bl-md max-w-[80%] border-l-4 ${colorClass}`}>
         {response.title && (
@@ -159,8 +161,8 @@ export default function EcoCoach() {
       {/* Header */}
       <div className="p-4 md:p-6 pb-3 animate-slide-up">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center shadow-lg shadow-emerald-500/20">
-            <Bot className="w-6 h-6 text-white" />
+          <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-500/20 overflow-hidden ring-2 ring-emerald-500/20">
+            <img src={ecoCoachAltImg} alt="Coach" className="w-full h-full object-cover" />
           </div>
           <div>
             <h1 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
@@ -177,8 +179,9 @@ export default function EcoCoach() {
         {showStarters && (
           <div className="py-8 space-y-6 animate-fade-in">
             <div className="text-center">
-              <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-emerald-500 to-cyan-500 flex items-center justify-center mx-auto mb-4 shadow-xl shadow-emerald-500/20">
-                <Sparkles className="w-10 h-10 text-white" />
+              <div className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-4 relative">
+                <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full" />
+                <img src={ecoCoachImg} alt="AI Coach" className="w-full h-full object-contain relative z-10 animate-float" />
               </div>
               <h2 className="text-xl font-bold text-gray-900 dark:text-white">How can I help?</h2>
               <p className="text-sm text-gray-500 mt-1">Ask me anything about reducing your carbon footprint</p>

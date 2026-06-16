@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { FileText, Download, Share2, CheckCircle2, Copy, Leaf, TreePine } from 'lucide-react';
+import reportsImg from '../assets/images/reports.png';
 import { useCarbon } from '../context/CarbonContext';
 import { categoryColors, categoryLabels, averages } from '../data/carbonFactors';
 import { achievements } from '../data/achievements';
@@ -245,12 +246,22 @@ export default function Report() {
   return (
     <div className="page-enter p-4 md:p-6 max-w-4xl mx-auto space-y-6">
       {/* Header */}
-      <div className="animate-slide-up">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
-          <FileText className="w-7 h-7 text-emerald-500" />
-          Sustainability <span className="text-gradient">Report</span>
-        </h1>
-        <p className="text-gray-500 dark:text-gray-400 mt-1">Your personalized carbon footprint analysis</p>
+      <div className="animate-slide-up relative glass-card overflow-hidden rounded-3xl p-6 md:p-8">
+        <div className="flex flex-col md:flex-row items-center gap-6 relative z-10">
+          <div className="flex-1 space-y-3 text-center md:text-left">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white flex items-center justify-center md:justify-start gap-3">
+              <FileText className="w-7 h-7 text-emerald-500" />
+              Sustainability <span className="text-gradient">Report</span>
+            </h1>
+            <p className="text-gray-600 dark:text-gray-300 max-w-lg mx-auto md:mx-0 text-sm md:text-base">
+              Your personalized carbon footprint analysis, weekly comparisons, and tailored recommendations.
+            </p>
+          </div>
+          <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 relative">
+            <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full" />
+            <img src={reportsImg} alt="Reports" className="w-full h-full object-contain relative z-10 animate-float" />
+          </div>
+        </div>
       </div>
 
       {/* Action Buttons */}

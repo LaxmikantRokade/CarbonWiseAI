@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Car, Zap, Utensils, Trash2, Bike, Bus, Train, Plane, Footprints, CheckCircle2 } from 'lucide-react';
+import calculatorImg from '../assets/images/carbon-calculator.png';
 import { useCarbon } from '../context/CarbonContext';
 import { transportFactors, electricityFactors, foodFactors, wasteFactors, dietPresets, categoryColors } from '../data/carbonFactors';
 
@@ -88,11 +89,21 @@ export default function Calculator() {
       <SuccessToast show={showSuccess} onClose={() => setShowSuccess(false)} />
 
       {/* Header */}
-      <div className="animate-slide-up">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
-          Carbon <span className="text-gradient">Calculator</span>
-        </h1>
-        <p className="text-gray-500 dark:text-gray-400 mt-1">Calculate and log your carbon emissions</p>
+      <div className="animate-slide-up relative glass-card overflow-hidden rounded-3xl p-6 md:p-8">
+        <div className="flex flex-col md:flex-row items-center gap-6 relative z-10">
+          <div className="flex-1 space-y-3 text-center md:text-left">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
+              Carbon <span className="text-gradient">Calculator</span>
+            </h1>
+            <p className="text-gray-600 dark:text-gray-300 max-w-lg mx-auto md:mx-0 text-sm md:text-base">
+              Calculate and log your carbon emissions across transport, electricity, food, and waste.
+            </p>
+          </div>
+          <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 relative">
+            <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full" />
+            <img src={calculatorImg} alt="Calculator" className="w-full h-full object-contain relative z-10 animate-float" />
+          </div>
+        </div>
       </div>
 
       {/* Tab Navigation */}

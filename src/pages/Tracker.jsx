@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { LineChart, Trash2, Calendar, TrendingDown, Activity, BarChart3 } from 'lucide-react';
+import trackerImg from '../assets/images/tracker.png';
 import { useCarbon } from '../context/CarbonContext';
 import { categoryColors, categoryLabels } from '../data/carbonFactors';
 import CategoryIcon from '../components/CategoryIcon';
@@ -144,12 +145,22 @@ export default function Tracker() {
   return (
     <div className="page-enter p-4 md:p-6 max-w-5xl mx-auto space-y-6">
       {/* Header */}
-      <div className="animate-slide-up">
-        <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
-          <Activity className="w-7 h-7 text-emerald-500" />
-          Activity <span className="text-gradient">Tracker</span>
-        </h1>
-        <p className="text-gray-500 dark:text-gray-400 mt-1">View and manage your carbon emission history</p>
+      <div className="animate-slide-up relative glass-card overflow-hidden rounded-3xl p-6 md:p-8">
+        <div className="flex flex-col md:flex-row items-center gap-6 relative z-10">
+          <div className="flex-1 space-y-3 text-center md:text-left">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white flex items-center justify-center md:justify-start gap-3">
+              <Activity className="w-7 h-7 text-emerald-500" />
+              Activity <span className="text-gradient">Tracker</span>
+            </h1>
+            <p className="text-gray-600 dark:text-gray-300 max-w-lg mx-auto md:mx-0 text-sm md:text-base">
+              View and manage your carbon emission history and keep an eye on your green progress.
+            </p>
+          </div>
+          <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 relative">
+            <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full" />
+            <img src={trackerImg} alt="Tracker" className="w-full h-full object-contain relative z-10 animate-float" />
+          </div>
+        </div>
       </div>
 
       {/* Stats Row */}

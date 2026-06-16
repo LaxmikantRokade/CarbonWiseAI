@@ -1,5 +1,6 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { SlidersHorizontal, TrendingDown, TreePine, DollarSign, Leaf, ArrowDown } from 'lucide-react';
+import simulatorImg from '../assets/images/simulator.png';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { useCarbon } from '../context/CarbonContext';
 import { simulatorScenarios, calculateSavings } from '../data/simulatorData';
@@ -280,18 +281,20 @@ export default function Simulator() {
   return (
     <div className="page-enter space-y-6">
       {/* Header */}
-      <div className="stagger-1 animate-slide-up">
-        <div className="flex items-center gap-3 mb-1">
-          <div className="p-2.5 rounded-xl bg-gradient-to-br from-emerald-500 to-cyan-500 shadow-lg shadow-emerald-500/25">
-            <SlidersHorizontal className="w-6 h-6 text-white" />
-          </div>
-          <div>
-            <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
+      <div className="stagger-1 animate-slide-up relative glass-card overflow-hidden rounded-3xl p-6 md:p-8 mb-6">
+        <div className="flex flex-col md:flex-row items-center gap-6 relative z-10">
+          <div className="flex-1 space-y-3 text-center md:text-left">
+            <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white flex items-center justify-center md:justify-start gap-3">
+              <SlidersHorizontal className="w-7 h-7 text-emerald-500" />
               Carbon Savings <span className="text-gradient">Simulator</span>
             </h1>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
-              See how changing habits impacts your footprint
+            <p className="text-gray-600 dark:text-gray-300 max-w-lg mx-auto md:mx-0 text-sm md:text-base">
+              See how changing your daily habits impacts your footprint and discover the best ways to reduce emissions.
             </p>
+          </div>
+          <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 relative">
+            <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full" />
+            <img src={simulatorImg} alt="Simulator" className="w-full h-full object-contain relative z-10 animate-float" />
           </div>
         </div>
       </div>

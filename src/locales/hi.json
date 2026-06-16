@@ -1,0 +1,39 @@
+{
+  "nav": {
+    "dashboard": "डैशबोर्ड",
+    "calculator": "कैलकुलेटर",
+    "tracker": "ट्रैकर",
+    "coach": "AI कोच",
+    "simulator": "सिम्युलेटर",
+    "leaderboard": "लीडरबोर्ड",
+    "goals": "लक्ष्य",
+    "achievements": "उपलब्धियां",
+    "report": "रिपोर्ट",
+    "settings": "सेटिंग्स"
+  },
+  "settings": {
+    "title": "सेटिंग्स",
+    "appearance": "दिखावट",
+    "theme": "थीम",
+    "light": "हल्का",
+    "dark": "गहरा",
+    "system": "सिस्टम",
+    "accessibility": "पहुंच",
+    "highContrast": "उच्च कंट्रास्ट मोड",
+    "language": "भाषा",
+    "save": "परिवर्तन सहेजें"
+  },
+  "dashboard": {
+    "welcome": "CarbonWise AI में आपका स्वागत है",
+    "goodMorning": "शुभ प्रभात",
+    "goodAfternoon": "शुभ दोपहर",
+    "goodEvening": "शुभ संध्या",
+    "streak": "दिनों की स्ट्रीक",
+    "co2ThisWeek": "इस सप्ताह CO₂",
+    "carbonScore": "कार्बन स्कोर",
+    "badgesEarned": "अर्जित बैज",
+    "activeGoals": "सक्रिय लक्ष्य",
+    "recentActivity": "हाल की गतिविधि",
+    "viewAll": "सभी देखें"
+  }
+}

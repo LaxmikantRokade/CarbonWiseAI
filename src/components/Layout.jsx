@@ -3,10 +3,12 @@ import { Outlet, NavLink } from 'react-router-dom';
 import {
   LayoutDashboard, Calculator, LineChart, Bot,
   SlidersHorizontal, Trophy, Target, Award, FileText,
-  Leaf, Menu, X, MoreHorizontal, ChevronRight,
+  Leaf, Menu, X, MoreHorizontal, ChevronRight, Settings as SettingsIcon
 } from 'lucide-react';
+import { motion } from 'framer-motion';
 import ThemeToggle from './ThemeToggle';
 import { useCarbon } from '../context/CarbonContext';
+import { useTranslation } from 'react-i18next';
 
 const navItems = [
   { to: '/', icon: LayoutDashboard, label: 'Dashboard', end: true },
@@ -18,6 +20,7 @@ const navItems = [
   { to: '/goals', icon: Target, label: 'Goals' },
   { to: '/achievements', icon: Award, label: 'Achievements' },
   { to: '/report', icon: FileText, label: 'Report' },
+  { to: '/settings', icon: SettingsIcon, label: 'Settings' },
 ];
 
 const mobileTabItems = [
@@ -32,6 +35,7 @@ export default function Layout() {
   console.log('[App Init] Layout.jsx rendered');
   if (window.logDebug) window.logDebug('Layout.jsx rendered');
   const { state } = useCarbon();
+  const { t } = useTranslation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [moreMenuOpen, setMoreMenuOpen] = useState(false);
 
@@ -40,7 +44,9 @@ export default function Layout() {
   );
 
   return (
-    <div className="flex-1 flex w-full bg-gray-50 dark:bg-carbon-950 overflow-hidden">
+    <div className="flex-1 flex w-full bg-gray-50 dark:bg-carbon-950 overflow-hidden relative">
+      <div className="aurora-bg"></div>
+      
       {/* ======= Desktop Sidebar ======= */}
       <aside className="hidden md:flex flex-col w-64 shrink-0
         bg-white/70 dark:bg-white/5 backdrop-blur-xl
@@ -87,7 +93,7 @@ export default function Layout() {
                     )}
                     <Icon size={18} className={`shrink-0 transition-transform duration-200
                       ${isActive ? 'scale-110' : 'group-hover:scale-105'}`} />
-                    <span>{item.label}</span>
+                    <span>{t(`nav.${item.to === '/' ? 'dashboard' : item.to.replace('/', '')}`, item.label)}</span>
                     {isActive && (
                       <ChevronRight size={14} className="ml-auto opacity-50" />
                     )}
@@ -160,7 +166,7 @@ export default function Layout() {
                     }
                   >
                     <Icon size={18} />
-                    <span>{item.label}</span>
+                    <span>{t(`nav.${item.to === '/' ? 'dashboard' : item.to.replace('/', '')}`, item.label)}</span>
                   </NavLink>
                 );
               })}
@@ -190,10 +196,16 @@ export default function Layout() {
         </header>
 
         {/* Page content */}
-        <main className="flex-1 overflow-y-auto bg-gradient-mesh">
-          <div className="page-enter p-4 md:p-6 lg:p-8 pb-24 md:pb-8">
+        <main className="flex-1 overflow-y-auto bg-gradient-mesh relative z-10">
+          <motion.div 
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.3 }}
+            className="p-4 md:p-6 lg:p-8 pb-24 md:pb-8"
+          >
             <Outlet />
-          </div>
+          </motion.div>
         </main>
 
         {/* ======= Mobile Bottom Tab Bar ======= */}
@@ -224,7 +236,7 @@ export default function Layout() {
                       ${isActive ? 'bg-primary-500/10 scale-110' : ''}`}>
                       <Icon size={20} />
                     </div>
-                    <span>{item.label}</span>
+                    <span>{t(`nav.${item.to === '/' ? 'dashboard' : item.to.replace('/', '')}`, item.label)}</span>
                   </>
                 )}
               </NavLink>
@@ -271,7 +283,7 @@ export default function Layout() {
                         }
                       >
                         <Icon size={16} />
-                        <span>{item.label}</span>
+                        <span>{t(`nav.${item.to === '/' ? 'dashboard' : item.to.replace('/', '')}`, item.label)}</span>
                       </NavLink>
                     );
                   })}

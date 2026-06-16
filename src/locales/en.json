@@ -1,0 +1,39 @@
+{
+  "nav": {
+    "dashboard": "Dashboard",
+    "calculator": "Calculator",
+    "tracker": "Tracker",
+    "coach": "AI Coach",
+    "simulator": "Simulator",
+    "leaderboard": "Leaderboard",
+    "goals": "Goals",
+    "achievements": "Achievements",
+    "report": "Report",
+    "settings": "Settings"
+  },
+  "settings": {
+    "title": "Settings",
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "light": "Light",
+    "dark": "Dark",
+    "system": "System",
+    "accessibility": "Accessibility",
+    "highContrast": "High Contrast Mode",
+    "language": "Language",
+    "save": "Save Changes"
+  },
+  "dashboard": {
+    "welcome": "Welcome to CarbonWise AI",
+    "goodMorning": "Good morning",
+    "goodAfternoon": "Good afternoon",
+    "goodEvening": "Good evening",
+    "streak": "day streak",
+    "co2ThisWeek": "CO₂ This Week",
+    "carbonScore": "Carbon Score",
+    "badgesEarned": "Badges Earned",
+    "activeGoals": "Active Goals",
+    "recentActivity": "Recent Activity",
+    "viewAll": "View All"
+  }
+}

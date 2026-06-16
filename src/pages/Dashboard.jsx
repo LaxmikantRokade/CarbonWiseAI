@@ -13,6 +13,7 @@ import EmissionChart from '../components/EmissionChart';
 import GoalCard from '../components/GoalCard';
 import CategoryIcon from '../components/CategoryIcon';
 import heroDashboardImg from '../assets/images/hero-dashboard.png';
+import { useTranslation } from 'react-i18next';
 
 /* ───── helper: relative time ───── */
 function relativeTime(dateStr) {
@@ -52,6 +53,7 @@ export default function Dashboard() {
   console.log('[App Init] Dashboard.jsx rendered');
   if (window.logDebug) window.logDebug('Dashboard.jsx rendered');
   const { state } = useCarbon();
+  const { t } = useTranslation();
   const { entries, goals, unlockedAchievements, streak, carbonScore, profile } = state;
 
   /* ── Compute weekly data ── */
@@ -217,7 +219,7 @@ export default function Dashboard() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
           <div>
             <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white">
-              Good {new Date().getHours() < 12 ? 'morning' : new Date().getHours() < 18 ? 'afternoon' : 'evening'},{' '}
+              {new Date().getHours() < 12 ? t('dashboard.goodMorning', 'Good morning') : new Date().getHours() < 18 ? t('dashboard.goodAfternoon', 'Good afternoon') : t('dashboard.goodEvening', 'Good evening')},{' '}
               <span className="text-gradient">{profile?.name || 'Eco Warrior'}</span>
             </h1>
             <p className="text-gray-500 dark:text-gray-400 mt-1">{formatToday()}</p>
@@ -225,7 +227,7 @@ export default function Dashboard() {
           <div className="flex items-center gap-2 px-4 py-2 glass-card !rounded-full">
             <Flame className="w-5 h-5 text-amber-500" />
             <span className="font-bold text-gray-800 dark:text-white">{streak}</span>
-            <span className="text-sm text-gray-500 dark:text-gray-400">day streak</span>
+            <span className="text-sm text-gray-500 dark:text-gray-400">{t('dashboard.streak', 'day streak')}</span>
           </div>
         </div>
       </section>
@@ -234,7 +236,7 @@ export default function Dashboard() {
       <section className="grid grid-cols-2 lg:grid-cols-4 gap-4 animate-slide-up stagger-2">
         <StatCard
           icon={TrendingDown}
-          label="CO₂ This Week"
+          label={t('dashboard.co2ThisWeek', 'CO₂ This Week')}
           value={weeklyData.thisWeekTotal.toFixed(1)}
           suffix="kg"
           trend={weeklyData.trend}
@@ -243,7 +245,7 @@ export default function Dashboard() {
         />
         <StatCard
           icon={Sparkles}
-          label="Carbon Score"
+          label={t('dashboard.carbonScore', 'Carbon Score')}
           value={carbonScore}
           suffix="/100"
           color="cyan"
@@ -257,7 +259,7 @@ export default function Dashboard() {
         />
         <StatCard
           icon={Award}
-          label="Badges Earned"
+          label={t('dashboard.badgesEarned', 'Badges Earned')}
           value={unlockedAchievements.length}
           suffix={`/ ${achievements.length}`}
           color="violet"
@@ -267,7 +269,7 @@ export default function Dashboard() {
       {/* ═══════════════ Carbon Score Ring ═══════════════ */}
       <section className="animate-slide-up stagger-3">
         <div className="glass-card p-8 flex flex-col items-center gradient-border">
-          <CarbonScore score={carbonScore} size={200} label="Your Carbon Score" />
+          <CarbonScore score={carbonScore} size={200} label={t('dashboard.carbonScore', 'Your Carbon Score')} />
           <p className="text-sm text-gray-500 dark:text-gray-400 mt-4 max-w-md text-center">
             Your score reflects your weekly emissions compared to the national average. Keep it high by making green choices!
           </p>
@@ -295,12 +297,12 @@ export default function Dashboard() {
       {/* ═══════════════ Active Goals ═══════════════ */}
       <section className="animate-slide-up stagger-5">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">Active Goals</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white">{t('dashboard.activeGoals', 'Active Goals')}</h2>
           <Link
             to="/goals"
             className="flex items-center gap-1 text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:underline"
           >
-            View All <ArrowRight className="w-4 h-4" />
+            {t('dashboard.viewAll', 'View All')} <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
         {activeGoals.length > 0 ? (
@@ -326,12 +328,12 @@ export default function Dashboard() {
       {/* ═══════════════ Recent Activity ═══════════════ */}
       <section className="animate-slide-up stagger-6">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-bold text-gray-900 dark:text-white">Recent Activity</h2>
+          <h2 className="text-xl font-bold text-gray-900 dark:text-white">{t('dashboard.recentActivity', 'Recent Activity')}</h2>
           <Link
             to="/tracker"
             className="flex items-center gap-1 text-sm font-medium text-emerald-600 dark:text-emerald-400 hover:underline"
           >
-            View All <ArrowRight className="w-4 h-4" />
+            {t('dashboard.viewAll', 'View All')} <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
         <div className="glass-card divide-y divide-gray-200/50 dark:divide-white/5">

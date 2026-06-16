@@ -15,6 +15,8 @@ const initialState = {
     joinDate: new Date().toISOString(),
   },
   theme: 'system',
+  highContrast: false,
+  language: 'en',
   chatHistory: [],
 };
 
@@ -139,6 +141,12 @@ function carbonReducer(state, action) {
     case 'SET_THEME':
       return { ...state, theme: action.payload };
 
+    case 'SET_HIGH_CONTRAST':
+      return { ...state, highContrast: action.payload };
+
+    case 'SET_LANGUAGE':
+      return { ...state, language: action.payload };
+
     case 'UPDATE_PROFILE':
       return { ...state, profile: { ...state.profile, ...action.payload } };
 
@@ -214,6 +222,16 @@ export function CarbonProvider({ children }) {
     }
   }, [state.theme]);
 
+  // High Contrast management
+  useEffect(() => {
+    const root = document.documentElement;
+    if (state.highContrast) {
+      root.classList.add('high-contrast');
+    } else {
+      root.classList.remove('high-contrast');
+    }
+  }, [state.highContrast]);
+
   const addEntry = useCallback((entry) => {
     dispatch({ type: 'ADD_ENTRY', payload: entry });
   }, []);
@@ -246,6 +264,14 @@ export function CarbonProvider({ children }) {
     }
   }, []);
 
+  const setHighContrast = useCallback((enabled) => {
+    dispatch({ type: 'SET_HIGH_CONTRAST', payload: enabled });
+  }, []);
+
+  const setLanguage = useCallback((lang) => {
+    dispatch({ type: 'SET_LANGUAGE', payload: lang });
+  }, []);
+
   const addChatMessage = useCallback((message) => {
     dispatch({ type: 'ADD_CHAT_MESSAGE', payload: message });
   }, []);
@@ -259,6 +285,8 @@ export function CarbonProvider({ children }) {
     updateGoal,
     deleteGoal,
     setTheme,
+    setHighContrast,
+    setLanguage,
     addChatMessage,
   };
 

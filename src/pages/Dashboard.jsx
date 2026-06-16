@@ -12,6 +12,7 @@ import CarbonScore from '../components/CarbonScore';
 import EmissionChart from '../components/EmissionChart';
 import GoalCard from '../components/GoalCard';
 import CategoryIcon from '../components/CategoryIcon';
+import heroDashboardImg from '../assets/images/hero-dashboard.png';
 
 /* ───── helper: relative time ───── */
 function relativeTime(dateStr) {
@@ -126,38 +127,82 @@ export default function Dashboard() {
   /* ── Empty State ── */
   if (entries.length === 0) {
     return (
-      <div className="page-enter min-h-[70vh] flex items-center justify-center px-4">
-        <div className="glass-card max-w-lg w-full p-10 text-center space-y-6">
-          <div className="mx-auto w-20 h-20 rounded-full bg-emerald-500/10 flex items-center justify-center animate-float">
-            <Leaf className="w-10 h-10 text-emerald-500" />
-          </div>
-          <div className="space-y-2">
-            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
-              Welcome to <span className="text-gradient">CarbonWise AI</span>
-            </h2>
-            <p className="text-gray-500 dark:text-gray-400 max-w-sm mx-auto">
-              Start tracking your carbon footprint today. Log your first entry and begin your journey to a greener life.
-            </p>
-          </div>
-          <Link
-            to="/calculator"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-semibold rounded-xl shadow-lg hover:shadow-glow transition-all duration-300 hover:scale-105"
-          >
-            <PlusCircle className="w-5 h-5" />
-            Log Your First Entry
-          </Link>
-          <div className="flex items-center justify-center gap-6 text-sm text-gray-400 pt-2">
-            <div className="flex items-center gap-1.5">
-              <Cloud className="w-4 h-4" />
-              <span>Track CO₂</span>
+      <div className="page-enter min-h-[75vh] flex items-center justify-center px-4 md:px-8 py-10">
+        <div className="glass-card max-w-6xl w-full p-8 md:p-12 lg:p-16 flex flex-col lg:flex-row items-center gap-8 lg:gap-16 gradient-border">
+          {/* Left Column: Welcome Content */}
+          <div className="flex-1 text-left space-y-6 md:space-y-8 order-2 lg:order-1">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-500/10 dark:bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 text-xs font-semibold animate-fade-in border border-emerald-500/20">
+              <Leaf className="w-3.5 h-3.5" />
+              <span>Let's build a greener future</span>
             </div>
-            <div className="flex items-center gap-1.5">
-              <Activity className="w-4 h-4" />
-              <span>Set Goals</span>
+            
+            <div className="space-y-4">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 dark:text-white leading-tight tracking-tight">
+                Welcome to <br />
+                <span className="text-gradient">CarbonWise AI</span>
+              </h2>
+              <p className="text-gray-500 dark:text-gray-400 text-sm md:text-base lg:text-lg leading-relaxed max-w-lg">
+                Empowering you to measure, analyze, and reduce your personal carbon footprint. Log your first activity today and take the first step towards an eco-friendly lifestyle.
+              </p>
             </div>
-            <div className="flex items-center gap-1.5">
-              <Award className="w-4 h-4" />
-              <span>Earn Badges</span>
+
+            <div className="pt-2">
+              <Link
+                to="/calculator"
+                className="inline-flex items-center gap-2.5 px-7 py-3.5 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-bold rounded-xl shadow-lg shadow-emerald-500/25 hover:shadow-glow transition-all duration-300 hover:scale-[1.03]"
+              >
+                <PlusCircle className="w-5 h-5" />
+                Log Your First Entry
+              </Link>
+            </div>
+
+            {/* Features Row */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 md:pt-8 border-t border-gray-200/50 dark:border-white/5">
+              <div className="flex items-start gap-3">
+                <div className="p-2 bg-emerald-500/15 dark:bg-emerald-500/20 rounded-lg text-emerald-500">
+                  <Cloud className="w-4 h-4" />
+                </div>
+                <div className="space-y-0.5">
+                  <p className="text-xs font-bold text-gray-800 dark:text-gray-200">Track CO₂</p>
+                  <p className="text-[11px] text-gray-400 dark:text-gray-500 leading-normal">Quantify your daily actions</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="p-2 bg-cyan-500/15 dark:bg-cyan-500/20 rounded-lg text-cyan-500">
+                  <Activity className="w-4 h-4" />
+                </div>
+                <div className="space-y-0.5">
+                  <p className="text-xs font-bold text-gray-800 dark:text-gray-200">Set Goals</p>
+                  <p className="text-[11px] text-gray-400 dark:text-gray-500 leading-normal">Adopt eco-friendly habits</p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <div className="p-2 bg-violet-500/15 dark:bg-violet-500/20 rounded-lg text-violet-500">
+                  <Award className="w-4 h-4" />
+                </div>
+                <div className="space-y-0.5">
+                  <p className="text-xs font-bold text-gray-800 dark:text-gray-200">Earn Badges</p>
+                  <p className="text-[11px] text-gray-400 dark:text-gray-500 leading-normal">Celebrate eco milestones</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Hero Image Illustration */}
+          <div className="flex-1 w-full max-w-md lg:max-w-none relative group order-1 lg:order-2">
+            {/* Soft decorative background glow */}
+            <div className="absolute -inset-3 rounded-3xl bg-gradient-to-r from-emerald-500/20 to-cyan-500/20 blur-xl opacity-75 group-hover:opacity-100 group-hover:scale-105 transition duration-700" />
+            
+            {/* Card wrapper for image */}
+            <div className="relative glass-card border border-white/20 dark:border-white/10 overflow-hidden rounded-2xl shadow-2xl p-1 bg-white/20 dark:bg-black/20">
+              <img
+                src={heroDashboardImg}
+                alt="CarbonWise AI Dashboard Preview"
+                fetchPriority="high"
+                className="w-full h-auto object-cover rounded-xl transition-transform duration-700 group-hover:scale-[1.015]"
+              />
             </div>
           </div>
         </div>

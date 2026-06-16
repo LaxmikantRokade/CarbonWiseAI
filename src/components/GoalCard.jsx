@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import { CheckCircle2, Trash2, PartyPopper, Target } from 'lucide-react';
 import CategoryIcon from './CategoryIcon';
 
-export default function GoalCard({ goal, onUpdate, onDelete }) {
+const GoalCard = memo(function GoalCard({ goal, onUpdate, onDelete }) {
   const [showCelebration, setShowCelebration] = useState(false);
   const [animatedProgress, setAnimatedProgress] = useState(0);
 
@@ -118,4 +118,6 @@ export default function GoalCard({ goal, onUpdate, onDelete }) {
       )}
     </div>
   );
-}
+});
+
+export default GoalCard;

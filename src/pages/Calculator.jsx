@@ -1,8 +1,9 @@
 import { useState, useMemo } from 'react';
 import { Car, Zap, Utensils, Trash2, Bike, Bus, Train, Plane, Footprints, CheckCircle2 } from 'lucide-react';
-import calculatorImg from '../assets/images/carbon-calculator.png';
+import calculatorImg from '../assets/images/carbon-calculator.webp';
 import { useCarbon } from '../context/CarbonContext';
 import { transportFactors, electricityFactors, foodFactors, wasteFactors, dietPresets, categoryColors } from '../data/carbonFactors';
+import { useTranslation } from 'react-i18next';
 
 const tabs = [
   { id: 'transport', label: 'Transport', icon: Car, color: 'amber' },
@@ -36,6 +37,7 @@ function SuccessToast({ show, onClose }) {
 
 export default function Calculator() {
   const { addEntry } = useCarbon();
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState('transport');
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -101,7 +103,7 @@ export default function Calculator() {
           </div>
           <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 relative">
             <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full" />
-            <img src={calculatorImg} alt="Calculator" className="w-full h-full object-contain relative z-10 animate-float" />
+            <img src={calculatorImg} alt={t('calculator.imageAlt', 'Calculator')} loading="lazy" className="w-full h-full object-contain relative z-10 animate-float" />
           </div>
         </div>
       </div>
@@ -115,6 +117,7 @@ export default function Calculator() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
+              aria-label={t(`calculator.tabs.${tab.id}`, tab.label)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 whitespace-nowrap ${
                 isActive
                   ? `bg-${tab.color}-500/15 text-${tab.color}-600 dark:text-${tab.color}-400 ring-1 ring-${tab.color}-500/30`
@@ -361,6 +364,7 @@ export default function Calculator() {
       {/* Log Button */}
       <button
         onClick={handleLog}
+        aria-label={t('calculator.logEntry', 'Log Entry')}
         className="w-full py-4 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-semibold text-lg shadow-lg hover:shadow-xl hover:shadow-emerald-500/20 transform hover:-translate-y-0.5 transition-all duration-300 animate-slide-up stagger-4"
       >
         Log Entry — {Math.abs(currentCalc).toFixed(2)} kg CO₂e

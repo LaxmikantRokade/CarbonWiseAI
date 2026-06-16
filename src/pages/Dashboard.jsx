@@ -12,7 +12,7 @@ import CarbonScore from '../components/CarbonScore';
 import EmissionChart from '../components/EmissionChart';
 import GoalCard from '../components/GoalCard';
 import CategoryIcon from '../components/CategoryIcon';
-import heroDashboardImg from '../assets/images/hero-dashboard.png';
+import heroDashboardImg from '../assets/images/hero-dashboard.webp';
 import { useTranslation } from 'react-i18next';
 
 /* ───── helper: relative time ───── */
@@ -202,6 +202,7 @@ export default function Dashboard() {
               <img
                 src={heroDashboardImg}
                 alt="CarbonWise AI Dashboard Preview"
+                loading="lazy"
                 fetchPriority="high"
                 className="w-full h-auto object-cover rounded-xl transition-transform duration-700 group-hover:scale-[1.015]"
               />

@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useEffect, useCallback } from 'react';
+import { createContext, useContext, useReducer, useEffect, useCallback, useMemo } from 'react';
 import { achievements } from '../data/achievements';
 
 const CarbonContext = createContext(null);
@@ -276,7 +276,7 @@ export function CarbonProvider({ children }) {
     dispatch({ type: 'ADD_CHAT_MESSAGE', payload: message });
   }, []);
 
-  const value = {
+  const value = useMemo(() => ({
     state,
     dispatch,
     addEntry,
@@ -288,7 +288,18 @@ export function CarbonProvider({ children }) {
     setHighContrast,
     setLanguage,
     addChatMessage,
-  };
+  }), [
+    state,
+    addEntry,
+    deleteEntry,
+    addGoal,
+    updateGoal,
+    deleteGoal,
+    setTheme,
+    setHighContrast,
+    setLanguage,
+    addChatMessage
+  ]);
 
   return (
     <CarbonContext.Provider value={value}>

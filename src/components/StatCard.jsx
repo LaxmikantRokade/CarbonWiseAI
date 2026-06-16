@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 
-export default function StatCard({ icon: Icon, title, label, value, unit, suffix, trend, trendValue, trendLabel, color = 'primary', delay = 0 }) {
+const StatCard = memo(function StatCard({ icon: Icon, title, label, value, unit, suffix, trend, trendValue, trendLabel, color = 'primary', delay = 0 }) {
   const colorStyles = {
     primary: {
       iconBg: 'bg-primary-100 dark:bg-primary-500/20',
@@ -98,4 +99,6 @@ export default function StatCard({ icon: Icon, title, label, value, unit, suffix
       </div>
     </div>
   );
-}
+});
+
+export default StatCard;

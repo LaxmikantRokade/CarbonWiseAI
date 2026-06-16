@@ -9,7 +9,7 @@ import {
   TrendingUp,
   ChevronRight,
 } from 'lucide-react';
-import achievementsImg from '../assets/images/achievements.png';
+import achievementsImg from '../assets/images/achievements.webp';
 import { useCarbon } from '../context/CarbonContext';
 import { achievements, achievementCategories } from '../data/achievements';
 
@@ -221,7 +221,7 @@ export default function Achievements() {
           </div>
           <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 relative">
             <div className="absolute inset-0 bg-amber-500/20 blur-3xl rounded-full" />
-            <img src={achievementsImg} alt="Achievements" className="w-full h-full object-contain relative z-10 animate-float" />
+            <img src={achievementsImg} alt="Achievements" loading="lazy" className="w-full h-full object-contain relative z-10 animate-float" />
           </div>
         </div>
       </div>

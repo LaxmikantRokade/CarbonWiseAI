@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 import { LineChart, Trash2, Calendar, TrendingDown, Activity, BarChart3 } from 'lucide-react';
-import trackerImg from '../assets/images/tracker.png';
+import trackerImg from '../assets/images/tracker.webp';
 import { useCarbon } from '../context/CarbonContext';
 import { categoryColors, categoryLabels } from '../data/carbonFactors';
 import CategoryIcon from '../components/CategoryIcon';
@@ -158,7 +158,7 @@ export default function Tracker() {
           </div>
           <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 relative">
             <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full" />
-            <img src={trackerImg} alt="Tracker" className="w-full h-full object-contain relative z-10 animate-float" />
+            <img src={trackerImg} alt="Tracker" loading="lazy" className="w-full h-full object-contain relative z-10 animate-float" />
           </div>
         </div>
       </div>

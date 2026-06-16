@@ -1,4 +1,5 @@
-import { Car, Zap, Utensils, Trash2 } from 'lucide-react';
+import { Car, Zap, Utensils, Trash2, Home, ShoppingBag, Plane, HelpCircle } from 'lucide-react';
+import { memo } from 'react';
 
 const iconMap = {
   transport: Car,
@@ -14,7 +15,7 @@ const colorMap = {
   waste: 'bg-rose-500/15 text-rose-500',
 };
 
-export default function CategoryIcon({ category, size = 'md', className = '' }) {
+const CategoryIcon = memo(function CategoryIcon({ category, size = 'md', className = '' }) {
   const Icon = iconMap[category] || Utensils;
   const color = colorMap[category] || colorMap.food;
 
@@ -35,4 +36,6 @@ export default function CategoryIcon({ category, size = 'md', className = '' }) 
       <Icon className={iconSizeMap[size]} />
     </div>
   );
-}
+});
+
+export default CategoryIcon;

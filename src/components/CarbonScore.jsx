@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, memo } from 'react';
 
 function getScoreColor(score) {
   if (score <= 30) return { stroke: '#ef4444', glow: 'rgba(239,68,68,0.3)', label: 'Needs Work' };
@@ -6,7 +6,7 @@ function getScoreColor(score) {
   return { stroke: '#10b981', glow: 'rgba(16,185,129,0.3)', label: 'Great!' };
 }
 
-export default function CarbonScore({ score = 50, size = 200, label = 'Carbon Score' }) {
+const CarbonScore = memo(function CarbonScore({ score = 50, size = 200, label = 'Carbon Score' }) {
   const [displayScore, setDisplayScore] = useState(0);
   const animationRef = useRef(null);
   const startTime = useRef(null);
@@ -129,4 +129,6 @@ export default function CarbonScore({ score = 50, size = 200, label = 'Carbon Sc
       </span>
     </div>
   );
-}
+});
+
+export default CarbonScore;

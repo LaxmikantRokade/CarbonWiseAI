@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, memo } from 'react';
 import {
   PieChart, Pie, Cell,
   BarChart, Bar,
@@ -95,7 +95,7 @@ function renderPieLabel({ cx, cy, midAngle, innerRadius, outerRadius, percent })
   );
 }
 
-export default function EmissionChart({
+const EmissionChart = memo(function EmissionChart({
   type = 'bar',
   data = [],
   colors = defaultColors,
@@ -261,4 +261,6 @@ export default function EmissionChart({
       </ChartErrorBoundary>
     </div>
   );
-}
+});
+
+export default EmissionChart;

@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { SlidersHorizontal, TrendingDown, TreePine, DollarSign, Leaf, ArrowDown } from 'lucide-react';
-import simulatorImg from '../assets/images/simulator.png';
+import simulatorImg from '../assets/images/simulator.webp';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from 'recharts';
 import { useCarbon } from '../context/CarbonContext';
 import { simulatorScenarios, calculateSavings } from '../data/simulatorData';
@@ -294,7 +294,7 @@ export default function Simulator() {
           </div>
           <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 relative">
             <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full" />
-            <img src={simulatorImg} alt="Simulator" className="w-full h-full object-contain relative z-10 animate-float" />
+            <img src={simulatorImg} alt="Simulator" loading="lazy" className="w-full h-full object-contain relative z-10 animate-float" />
           </div>
         </div>
       </div>

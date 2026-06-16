@@ -16,8 +16,9 @@ import {
   Sparkles,
   ArrowUpCircle,
 } from 'lucide-react';
-import goalsImg from '../assets/images/goals.png';
+import goalsImg from '../assets/images/goals.webp';
 import { useCarbon } from '../context/CarbonContext';
+import { useTranslation } from 'react-i18next';
 
 /* ─── Suggested goal templates ─── */
 const suggestedGoals = [
@@ -211,6 +212,7 @@ function GoalCard({ goal, onUpdate, onDelete, delay = '' }) {
 /* ─── Main Goals Page ─── */
 export default function Goals() {
   const { state, addGoal, updateGoal, deleteGoal } = useCarbon();
+  const { t } = useTranslation();
   const [showForm, setShowForm] = useState(false);
   const [showCompleted, setShowCompleted] = useState(false);
 
@@ -267,17 +269,16 @@ export default function Goals() {
       <div className="animate-slide-up opacity-0 stagger-1 relative glass-card overflow-hidden rounded-3xl p-6 md:p-8">
         <div className="flex flex-col md:flex-row items-center gap-6 relative z-10">
           <div className="flex-1 space-y-3 text-center md:text-left">
-            <h1 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white flex items-center justify-center md:justify-start gap-3">
-              <Target className="w-7 h-7 text-emerald-500" />
-              Sustainability <span className="text-gradient">Goals</span>
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
+              {t('goals.title', 'Carbon')} <span className="text-gradient">{t('goals.subtitle', 'Goals')}</span>
             </h1>
             <p className="text-gray-600 dark:text-gray-300 max-w-lg mx-auto md:mx-0 text-sm md:text-base">
-              Set weekly targets, track your eco-friendly progress, and build sustainable habits over time.
+              {t('goals.desc', 'Set and track your sustainability goals. Small steps lead to big impact.')}
             </p>
           </div>
           <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 relative">
             <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full" />
-            <img src={goalsImg} alt="Goals" className="w-full h-full object-contain relative z-10 animate-float" />
+            <img src={goalsImg} alt="Goals" loading="lazy" className="w-full h-full object-contain relative z-10 animate-float" />
           </div>
         </div>
       </div>

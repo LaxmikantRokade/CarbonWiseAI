@@ -1,4 +1,4 @@
-import { Car, Zap, Utensils, Trash2, Home, ShoppingBag, Plane, HelpCircle } from 'lucide-react';
+import { Car, Zap, Utensils, Trash2 } from 'lucide-react';
 import { memo } from 'react';
 
 const iconMap = {

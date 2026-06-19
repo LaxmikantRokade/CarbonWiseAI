@@ -68,14 +68,6 @@ const generalTips = [
   { title: 'Share Your Journey', message: 'Talking about sustainability with friends and family multiplies your impact. Studies show each person influences an average of 5 others!', impact: 'info' },
 ];
 
-const encouragements = [
-  "You're making a real difference! 🌍",
-  'Every small action counts toward a healthier planet! 💚',
-  'Keep up the great work — the Earth thanks you! 🌱',
-  "You're on a roll! Your streak shows real commitment! 🔥",
-  'Amazing progress this week! 🎉',
-  'Your choices today shape tomorrow\'s world! ✨',
-];
 
 export async function generateMockCoachResponse(state, userMessage = '') {
   // Simulate AI thinking delay for realism
@@ -99,7 +91,7 @@ export async function generateMockCoachResponse(state, userMessage = '') {
     }
   });
 
-  const totalWeekly = Object.values(categoryTotals).reduce((a, b) => a + b, 0);
+
   const sortedCategories = Object.entries(categoryTotals).sort((a, b) => b[1] - a[1]);
   const highestCategory = sortedCategories.length > 0 && sortedCategories[0][1] > 0 ? sortedCategories[0] : null;
 

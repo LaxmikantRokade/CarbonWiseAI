@@ -14,7 +14,7 @@ if (typeof window !== 'undefined' && typeof window.structuredClone !== 'function
   window.structuredClone = function (obj) {
     try {
       return JSON.parse(JSON.stringify(obj));
-    } catch (e) {
+    } catch {
       return obj;
     }
   };
@@ -31,7 +31,7 @@ class ChartErrorBoundary extends Component {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError() {
     return { hasError: true };
   }
 

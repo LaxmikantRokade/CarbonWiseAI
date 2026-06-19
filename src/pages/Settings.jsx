@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Settings as SettingsIcon, Moon, Sun, Monitor, Type, Globe, Check, Eye } from 'lucide-react';
+import { Settings as SettingsIcon, Moon, Sun, Monitor, Globe, Check, Eye } from 'lucide-react';
 import { useCarbon } from '../context/CarbonContext';
 import { motion } from 'framer-motion';
 import { useEffect } from 'react';

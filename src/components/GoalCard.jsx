@@ -1,15 +1,13 @@
 import { useState, useEffect, memo } from 'react';
-import { CheckCircle2, Trash2, PartyPopper, Target } from 'lucide-react';
+import { CheckCircle2, Trash2, PartyPopper } from 'lucide-react';
 import CategoryIcon from './CategoryIcon';
 
 const GoalCard = memo(function GoalCard({ goal, onUpdate, onDelete }) {
   const [showCelebration, setShowCelebration] = useState(false);
   const [animatedProgress, setAnimatedProgress] = useState(0);
 
-  if (!goal) return null;
-
-  const progress = goal.progress ?? Math.min(100, Math.round((goal.currentValue / goal.targetValue) * 100));
-  const isComplete = goal.completed || progress >= 100;
+  const progress = goal ? (goal.progress ?? Math.min(100, Math.round((goal.currentValue / goal.targetValue) * 100))) : 0;
+  const isComplete = goal ? (goal.completed || progress >= 100) : false;
 
   // Animate the progress bar
   useEffect(() => {
@@ -24,7 +22,10 @@ const GoalCard = memo(function GoalCard({ goal, onUpdate, onDelete }) {
       const timer = setTimeout(() => setShowCelebration(false), 3000);
       return () => clearTimeout(timer);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isComplete]);
+
+  if (!goal) return null;
 
   const handleComplete = () => {
     onUpdate?.({ ...goal, completed: true, progress: 100, currentValue: goal.targetValue });

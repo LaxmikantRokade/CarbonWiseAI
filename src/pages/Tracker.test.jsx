@@ -78,7 +78,7 @@ describe('Tracker Page', () => {
 
     localStorage.setItem('carbonwise_state', JSON.stringify(stateWithEntries));
 
-    const { container } = render(
+    render(
       <CarbonProvider>
         <Tracker />
       </CarbonProvider>

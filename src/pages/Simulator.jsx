@@ -224,6 +224,7 @@ function ChartTooltip({ active, payload, label }) {
 /*  SIMULATOR PAGE                                    */
 /* ================================================== */
 export default function Simulator() {
+  // eslint-disable-next-line no-unused-vars
   const { state } = useCarbon();
 
   // Slider values keyed by scenario id
@@ -294,7 +295,7 @@ export default function Simulator() {
           </div>
           <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 relative">
             <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full" />
-            <img src={simulatorImg} alt="Simulator" loading="lazy" className="w-full h-full object-contain relative z-10 animate-float" />
+            <img src={simulatorImg} alt="Illustration of an ecosystem simulator" loading="lazy" className="w-full h-full object-contain relative z-10 animate-float" />
           </div>
         </div>
       </div>

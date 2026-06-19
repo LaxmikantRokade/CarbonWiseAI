@@ -179,6 +179,7 @@ export function CarbonProvider({ children }) {
   // Persist state to localStorage
   useEffect(() => {
     try {
+      // eslint-disable-next-line no-unused-vars
       const { theme, ...stateToSave } = state;
       localStorage.setItem('carbonwise_state', JSON.stringify(stateToSave));
     } catch {
@@ -308,6 +309,7 @@ export function CarbonProvider({ children }) {
   );
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useCarbon() {
   const context = useContext(CarbonContext);
   if (!context) {

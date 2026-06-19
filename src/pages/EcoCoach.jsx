@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/purity */
 import { useState, useEffect, useRef } from 'react';
-import { Bot, Send, Sparkles } from 'lucide-react';
+import { Bot, Send } from 'lucide-react';
 import ecoCoachImg from '../assets/images/eco-coach.webp';
 import ecoCoachAltImg from '../assets/images/eco-coach-alt.webp';
 import { useCarbon } from '../context/CarbonContext';
@@ -68,7 +69,7 @@ export default function EcoCoach() {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [initialized, setInitialized] = useState(false);
+  const initialized = useRef(false);
   const chatEndRef = useRef(null);
   const inputRef = useRef(null);
 
@@ -82,10 +83,11 @@ export default function EcoCoach() {
 
   // Load chat history or send initial greeting
   useEffect(() => {
-    if (initialized) return;
-    setInitialized(true);
+    if (initialized.current) return;
+    initialized.current = true;
 
     if (state.chatHistory && state.chatHistory.length > 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setMessages(state.chatHistory);
     } else {
       // Auto-send welcome greeting via Local Mock Engine
@@ -162,7 +164,7 @@ export default function EcoCoach() {
       <div className="p-4 md:p-6 pb-3 animate-slide-up">
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-500/20 overflow-hidden ring-2 ring-emerald-500/20">
-            <img src={ecoCoachAltImg} alt="Coach" loading="lazy" className="w-full h-full object-cover" />
+            <img src={ecoCoachAltImg} alt="Avatar of Eco Coach" loading="lazy" className="w-full h-full object-cover" />
           </div>
           <div>
             <h1 className="text-lg font-bold text-gray-900 dark:text-white flex items-center gap-2">
@@ -181,7 +183,7 @@ export default function EcoCoach() {
             <div className="text-center">
               <div className="w-32 h-32 md:w-40 md:h-40 mx-auto mb-4 relative">
                 <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full" />
-                <img src={ecoCoachImg} alt="AI Coach" loading="lazy" className="w-full h-full object-contain relative z-10 animate-float" />
+                <img src={ecoCoachImg} alt="Illustration of AI Coach assisting with sustainability" loading="lazy" className="w-full h-full object-contain relative z-10 animate-float" />
               </div>
               <h2 className="text-xl font-bold text-gray-900 dark:text-white">How can I help?</h2>
               <p className="text-sm text-gray-500 mt-1">Ask me anything about reducing your carbon footprint</p>

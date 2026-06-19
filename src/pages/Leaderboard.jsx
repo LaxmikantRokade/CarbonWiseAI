@@ -1,10 +1,10 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import { Trophy, Crown, Medal, Award, Flame, Star, Users, TrendingUp, Filter } from 'lucide-react';
 import leaderboardImg from '../assets/images/leaderboard.webp';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell, RadarChart, PolarGrid, PolarAngleAxis, Radar, Legend } from 'recharts';
+import { ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, Radar, Legend } from 'recharts';
 import { useCarbon } from '../context/CarbonContext';
 import { generateLeaderboard, getPercentile, timeFilters, categoryFilters } from '../data/leaderboardData';
-import { categoryColors, categoryLabels } from '../data/carbonFactors';
+import { categoryColors } from '../data/carbonFactors';
 
 /* -------------------------------------------------- */
 /*  Animated counter                                  */
@@ -61,22 +61,7 @@ function getRankColors(rank) {
   return { bg: '', border: 'border-transparent', glow: '' };
 }
 
-/* -------------------------------------------------- */
-/*  Custom chart tooltip                              */
-/* -------------------------------------------------- */
-function ChartTooltip({ active, payload, label }) {
-  if (!active || !payload?.length) return null;
-  return (
-    <div className="glass-card p-3 !rounded-lg shadow-lg text-sm">
-      <p className="font-semibold text-slate-800 dark:text-white mb-1">{label}</p>
-      {payload.map((p, i) => (
-        <p key={i} className="text-xs" style={{ color: p.color || p.fill }}>
-          {p.name}: <strong>{p.value}</strong>
-        </p>
-      ))}
-    </div>
-  );
-}
+
 
 /* ================================================== */
 /*  LEADERBOARD PAGE                                  */
@@ -149,7 +134,7 @@ export default function Leaderboard() {
           </div>
           <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 relative">
             <div className="absolute inset-0 bg-amber-500/20 blur-3xl rounded-full" />
-            <img src={leaderboardImg} alt="Leaderboard" loading="lazy" className="w-full h-full object-contain relative z-10 animate-float" />
+            <img src={leaderboardImg} alt="Illustration of a leaderboard ranking" loading="lazy" className="w-full h-full object-contain relative z-10 animate-float" />
           </div>
         </div>
       </div>
@@ -259,7 +244,7 @@ export default function Leaderboard() {
       {/* ========== Top 3 Podium ========== */}
       <div className="stagger-4 animate-slide-up">
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          {top3.map((user, idx) => {
+          {top3.map((user) => {
             const colors = getRankColors(user.rank);
             const isMe = user.isCurrentUser;
 

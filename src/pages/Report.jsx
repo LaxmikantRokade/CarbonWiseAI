@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { FileText, Download, Share2, CheckCircle2, Copy, Leaf, TreePine } from 'lucide-react';
+import { Download, Share2, CheckCircle2, Copy, Leaf, TreePine } from 'lucide-react';
 import reportsImg from '../assets/images/reports.webp';
 import { useCarbon } from '../context/CarbonContext';
 import { categoryColors, categoryLabels, averages } from '../data/carbonFactors';
@@ -260,7 +260,7 @@ export default function Report() {
           </div>
           <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 relative">
             <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full" />
-            <img src={reportsImg} alt="Reports" loading="lazy" className="w-full h-full object-contain relative z-10 animate-float" />
+            <img src={reportsImg} alt="Illustration of environmental reports" loading="lazy" className="w-full h-full object-contain relative z-10 animate-float" />
           </div>
         </div>
       </div>

@@ -141,6 +141,7 @@ export default function Layout() {
                 <span className="font-extrabold text-gradient">CarbonWise</span>
               </div>
               <button
+                aria-label="Close menu"
                 onClick={() => setMobileMenuOpen(false)}
                 className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
               >
@@ -182,6 +183,7 @@ export default function Layout() {
           bg-white/80 dark:bg-carbon-900/80 backdrop-blur-xl
           border-b border-gray-200/50 dark:border-white/5 z-20">
           <button
+            aria-label="Open menu"
             onClick={() => setMobileMenuOpen(true)}
             className="p-2 -ml-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10
               transition-colors cursor-pointer"
@@ -246,6 +248,8 @@ export default function Layout() {
           {/* More button */}
           <div className="relative flex-1">
             <button
+              aria-label="More options"
+              aria-expanded={moreMenuOpen}
               onClick={() => setMoreMenuOpen(!moreMenuOpen)}
               className={`w-full flex flex-col items-center gap-0.5 py-2 text-[10px] font-semibold
                 transition-all duration-200 cursor-pointer

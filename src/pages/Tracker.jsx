@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { LineChart, Trash2, Calendar, TrendingDown, Activity, BarChart3 } from 'lucide-react';
+import { BarChart3, Calendar, Activity, TrendingDown, Trash2 } from 'lucide-react';
 import trackerImg from '../assets/images/tracker.webp';
 import { useCarbon } from '../context/CarbonContext';
 import { categoryColors, categoryLabels } from '../data/carbonFactors';
@@ -158,7 +158,7 @@ export default function Tracker() {
           </div>
           <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 relative">
             <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full" />
-            <img src={trackerImg} alt="Tracker" loading="lazy" className="w-full h-full object-contain relative z-10 animate-float" />
+            <img src={trackerImg} alt="Illustration of charts and tracking" loading="lazy" className="w-full h-full object-contain relative z-10 animate-float" />
           </div>
         </div>
       </div>
@@ -177,10 +177,12 @@ export default function Tracker() {
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex gap-2 overflow-x-auto pb-2 animate-slide-up stagger-3">
+      <div role="tablist" aria-label="Activity Categories" className="flex gap-2 overflow-x-auto pb-2 animate-slide-up stagger-3">
         {filters.map((f) => (
           <button
             key={f.id}
+            role="tab"
+            aria-selected={activeFilter === f.id}
             onClick={() => setActiveFilter(f.id)}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap ${
               activeFilter === f.id

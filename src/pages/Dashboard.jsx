@@ -5,11 +5,10 @@ import {
   Leaf, PlusCircle, Sparkles, Cloud,
 } from 'lucide-react';
 import { useCarbon } from '../context/CarbonContext';
-import { categoryColors, categoryLabels } from '../data/carbonFactors';
 import { achievements } from '../data/achievements';
+import { categoryLabels } from '../data/carbonFactors';
 import StatCard from '../components/StatCard';
 import CarbonScore from '../components/CarbonScore';
-import EmissionChart from '../components/EmissionChart';
 import GoalCard from '../components/GoalCard';
 import CategoryIcon from '../components/CategoryIcon';
 import heroDashboardImg from '../assets/images/hero-dashboard.webp';
@@ -39,15 +38,7 @@ function formatToday() {
   });
 }
 
-/* ───── helper: get day label ───── */
-function getDayLabel(dateStr) {
-  const d = new Date(dateStr);
-  const today = new Date();
-  const diff = Math.floor((today - d) / 86400000);
-  if (diff === 0) return 'Today';
-  if (diff === 1) return 'Yesterday';
-  return d.toLocaleDateString('en-US', { weekday: 'short' });
-}
+
 
 export default function Dashboard() {
   console.log('[App Init] Dashboard.jsx rendered');
@@ -79,39 +70,6 @@ export default function Dashboard() {
     }
 
     return { thisWeekTotal, lastWeekTotal, trend, thisWeek };
-  }, [entries]);
-
-  /* ── Category breakdown for pie chart ── */
-  const categoryData = useMemo(() => {
-    const cats = {};
-    weeklyData.thisWeek.forEach(e => {
-      if (e.amount > 0) {
-        cats[e.category] = (cats[e.category] || 0) + e.amount;
-      }
-    });
-    return Object.entries(cats).map(([cat, val]) => ({
-      name: categoryLabels[cat] || cat,
-      value: Math.round(val * 100) / 100,
-      color: categoryColors[cat] || '#6b7280',
-    }));
-  }, [weeklyData]);
-
-  /* ── Daily totals for area chart (last 7 days) ── */
-  const dailyData = useMemo(() => {
-    const days = [];
-    const now = new Date();
-    for (let i = 6; i >= 0; i--) {
-      const d = new Date(now);
-      d.setDate(d.getDate() - i);
-      const key = d.toISOString().split('T')[0];
-      const dayEntries = entries.filter(e => e.date?.split('T')[0] === key);
-      const total = dayEntries.reduce((s, e) => s + e.amount, 0);
-      days.push({
-        name: getDayLabel(d),
-        value: Math.round(total * 100) / 100,
-      });
-    }
-    return days;
   }, [entries]);
 
   /* ── Active goals (top 3) ── */

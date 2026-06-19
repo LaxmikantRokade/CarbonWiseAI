@@ -182,6 +182,7 @@ function GoalCard({ goal, onUpdate, onDelete, delay = '' }) {
         <div className="flex items-center gap-1.5 flex-1">
           <input
             type="number"
+            aria-label="Value to add to progress"
             min="1"
             max={goal.targetValue - (goal.currentValue || 0)}
             value={incrementVal}
@@ -278,7 +279,7 @@ export default function Goals() {
           </div>
           <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 relative">
             <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full" />
-            <img src={goalsImg} alt="Goals" loading="lazy" className="w-full h-full object-contain relative z-10 animate-float" />
+            <img src={goalsImg} alt="Illustration of target and goals" loading="lazy" className="w-full h-full object-contain relative z-10 animate-float" />
           </div>
         </div>
       </div>
@@ -294,6 +295,7 @@ export default function Goals() {
       <div className="glass-card overflow-hidden animate-slide-up opacity-0 stagger-3">
         {/* Toggle button */}
         <button
+          aria-expanded={showForm}
           onClick={() => setShowForm(!showForm)}
           className="w-full flex items-center justify-between p-5 hover:bg-white/5 transition-colors"
         >
@@ -320,10 +322,11 @@ export default function Goals() {
             <form onSubmit={handleSubmit} className="space-y-5 mt-4">
               {/* Title */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
+                <label htmlFor="goalTitle" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
                   Goal Title
                 </label>
                 <input
+                  id="goalTitle"
                   type="text"
                   value={formData.title}
                   onChange={(e) => handleFieldChange('title', e.target.value)}
@@ -335,10 +338,11 @@ export default function Goals() {
 
               {/* Description */}
               <div>
-                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
+                <label htmlFor="goalDescription" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
                   Description
                 </label>
                 <textarea
+                  id="goalDescription"
                   value={formData.description}
                   onChange={(e) => handleFieldChange('description', e.target.value)}
                   placeholder="Describe your goal..."
@@ -350,10 +354,11 @@ export default function Goals() {
               {/* Target + Unit + Category row */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
+                  <label htmlFor="goalTarget" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
                     Target Value
                   </label>
                   <input
+                    id="goalTarget"
                     type="number"
                     min="1"
                     value={formData.targetValue}
@@ -364,10 +369,11 @@ export default function Goals() {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
+                  <label htmlFor="goalUnit" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
                     Unit
                   </label>
                   <select
+                    id="goalUnit"
                     value={formData.unit}
                     onChange={(e) => handleFieldChange('unit', e.target.value)}
                     className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all appearance-none cursor-pointer"
@@ -379,10 +385,11 @@ export default function Goals() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
+                  <label htmlFor="goalCategory" className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1.5">
                     Category
                   </label>
                   <select
+                    id="goalCategory"
                     value={formData.category}
                     onChange={(e) => handleFieldChange('category', e.target.value)}
                     className="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500 transition-all appearance-none cursor-pointer"

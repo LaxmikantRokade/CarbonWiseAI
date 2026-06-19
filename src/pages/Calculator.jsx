@@ -1,8 +1,8 @@
 import { useState, useMemo } from 'react';
-import { Car, Zap, Utensils, Trash2, Bike, Bus, Train, Plane, Footprints, CheckCircle2 } from 'lucide-react';
+import { Car, Zap, Utensils, Trash2, CheckCircle2 } from 'lucide-react';
 import calculatorImg from '../assets/images/carbon-calculator.webp';
 import { useCarbon } from '../context/CarbonContext';
-import { transportFactors, electricityFactors, foodFactors, wasteFactors, dietPresets, categoryColors } from '../data/carbonFactors';
+import { transportFactors, electricityFactors, foodFactors, wasteFactors, dietPresets } from '../data/carbonFactors';
 import { useTranslation } from 'react-i18next';
 
 const tabs = [
@@ -12,7 +12,6 @@ const tabs = [
   { id: 'waste', label: 'Waste', icon: Trash2, color: 'rose' },
 ];
 
-const lucideIcons = { Car, Bike, Bus, Train, Plane, Zap, Footprints };
 
 function AnimatedNumber({ value }) {
   return (
@@ -103,19 +102,21 @@ export default function Calculator() {
           </div>
           <div className="w-32 h-32 md:w-40 md:h-40 shrink-0 relative">
             <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full" />
-            <img src={calculatorImg} alt={t('calculator.imageAlt', 'Calculator')} loading="lazy" className="w-full h-full object-contain relative z-10 animate-float" />
+            <img src={calculatorImg} alt="Illustration of a carbon footprint calculator" loading="lazy" className="w-full h-full object-contain relative z-10 animate-float" />
           </div>
         </div>
       </div>
 
       {/* Tab Navigation */}
-      <div className="flex gap-2 overflow-x-auto pb-2 animate-slide-up stagger-1">
+      <div role="tablist" aria-label="Calculator Categories" className="flex gap-2 overflow-x-auto pb-2 animate-slide-up stagger-1">
         {tabs.map((tab) => {
           const Icon = tab.icon;
           const isActive = activeTab === tab.id;
           return (
             <button
               key={tab.id}
+              role="tab"
+              aria-selected={isActive}
               onClick={() => setActiveTab(tab.id)}
               aria-label={t(`calculator.tabs.${tab.id}`, tab.label)}
               className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 whitespace-nowrap ${
@@ -154,6 +155,7 @@ export default function Calculator() {
                 return (
                   <button
                     key={key}
+                    aria-pressed={isSelected}
                     onClick={() => setSelectedTransport(key)}
                     className={`p-3 rounded-xl text-left transition-all duration-200 border ${
                       isSelected
@@ -169,8 +171,9 @@ export default function Calculator() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Distance (km)</label>
+              <label htmlFor="distanceInput" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Distance (km)</label>
               <input
+                id="distanceInput"
                 type="number"
                 value={distance}
                 onChange={(e) => setDistance(Math.max(0, Number(e.target.value)))}
@@ -188,6 +191,7 @@ export default function Calculator() {
                 ].map((f) => (
                   <button
                     key={f.id}
+                    aria-pressed={frequency === f.id}
                     onClick={() => setFrequency(f.id)}
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                       frequency === f.id
@@ -214,6 +218,7 @@ export default function Calculator() {
                 return (
                   <button
                     key={key}
+                    aria-pressed={isSelected}
                     onClick={() => setSelectedSource(key)}
                     className={`p-3 rounded-xl text-left transition-all duration-200 border ${
                       isSelected
@@ -229,8 +234,9 @@ export default function Calculator() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Monthly Usage (kWh)</label>
+              <label htmlFor="kwhInput" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Monthly Usage (kWh)</label>
               <input
+                id="kwhInput"
                 type="number"
                 value={kwhAmount}
                 onChange={(e) => setKwhAmount(Math.max(0, Number(e.target.value)))}
@@ -280,6 +286,7 @@ export default function Calculator() {
                 return (
                   <button
                     key={key}
+                    aria-pressed={isSelected}
                     onClick={() => setSelectedFood(key)}
                     className={`p-3 rounded-xl text-left transition-all duration-200 border ${
                       isSelected
@@ -295,10 +302,11 @@ export default function Calculator() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+              <label htmlFor="foodQuantityInput" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                 Quantity ({foodFactors[selectedFood]?.unit || 'kg'})
               </label>
               <input
+                id="foodQuantityInput"
                 type="number"
                 step="0.1"
                 value={foodQuantity}
@@ -321,6 +329,7 @@ export default function Calculator() {
                 return (
                   <button
                     key={key}
+                    aria-pressed={isSelected}
                     onClick={() => setSelectedWaste(key)}
                     className={`p-3 rounded-xl text-left transition-all duration-200 border ${
                       isSelected
@@ -340,8 +349,9 @@ export default function Calculator() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Weight (kg)</label>
+              <label htmlFor="wasteWeightInput" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Weight (kg)</label>
               <input
+                id="wasteWeightInput"
                 type="number"
                 step="0.5"
                 value={wasteWeight}

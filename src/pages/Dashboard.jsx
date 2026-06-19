@@ -192,7 +192,7 @@ export default function Dashboard() {
       </section>
 
       {/* ═══════════════ Quick Stats ═══════════════ */}
-      <section className="grid grid-cols-2 lg:grid-cols-4 gap-4 animate-slide-up stagger-2">
+      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 animate-slide-up stagger-2">
         <StatCard
           icon={TrendingDown}
           label={t('dashboard.co2ThisWeek', 'CO₂ This Week')}

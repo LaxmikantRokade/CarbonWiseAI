@@ -358,7 +358,7 @@ export default function Report() {
         {/* Weekly Comparison */}
         <div className="p-8 border-b border-gray-100">
           <h3 className="text-lg font-bold text-gray-800 mb-4">Weekly Comparison</h3>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             <div className="text-center p-4 bg-gray-50 rounded-xl">
               <p className="text-sm text-gray-500 mb-1">This Week</p>
               <p className="text-3xl font-bold text-gray-800">{reportData.thisWeekTotal.toFixed(1)}</p>
@@ -386,7 +386,7 @@ export default function Report() {
         {reportData.unlockedBadges.length > 0 && (
           <div className="p-8 border-b border-gray-100">
             <h3 className="text-lg font-bold text-gray-800 mb-4">Top Achievements</h3>
-            <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
               {reportData.unlockedBadges.slice(0, 6).map((badge) => (
                 <div key={badge.id} className="text-center p-3 bg-gray-50 rounded-xl">
                   <span className="text-2xl block mb-1">{badge.icon}</span>
@@ -400,7 +400,7 @@ export default function Report() {
         {/* Streak & Goals */}
         <div className="p-8 border-b border-gray-100">
           <h3 className="text-lg font-bold text-gray-800 mb-4">Streak & Goals</h3>
-          <div className="grid grid-cols-3 gap-4 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
             <div className="p-3 bg-gray-50 rounded-xl">
               <p className="text-2xl font-bold text-gray-800">🔥 {state.streak}</p>
               <p className="text-xs text-gray-500">Day Streak</p>
@@ -434,7 +434,7 @@ export default function Report() {
         {/* Environmental Impact */}
         <div className="p-8">
           <h3 className="text-lg font-bold text-gray-800 mb-4">Environmental Impact Equivalents</h3>
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="flex items-center gap-3 p-4 bg-emerald-50 rounded-xl">
               <TreePine className="w-8 h-8 text-emerald-500" />
               <div>

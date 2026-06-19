@@ -149,7 +149,7 @@ export default function Calculator() {
             <h3 className="font-semibold text-gray-800 dark:text-gray-200 flex items-center gap-2">
               <Car className="w-5 h-5 text-amber-500" /> Select Transport Type
             </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
               {Object.entries(transportFactors).map(([key, val]) => {
                 const isSelected = selectedTransport === key;
                 return (
@@ -212,7 +212,7 @@ export default function Calculator() {
             <h3 className="font-semibold text-gray-800 dark:text-gray-200 flex items-center gap-2">
               <Zap className="w-5 h-5 text-blue-500" /> Energy Source
             </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
               {Object.entries(electricityFactors).map(([key, val]) => {
                 const isSelected = selectedSource === key;
                 return (
@@ -280,7 +280,7 @@ export default function Calculator() {
             </div>
 
             <h3 className="font-semibold text-gray-800 dark:text-gray-200">Select Food Item</h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
               {Object.entries(foodFactors).map(([key, val]) => {
                 const isSelected = selectedFood === key;
                 return (
@@ -322,7 +322,7 @@ export default function Calculator() {
             <h3 className="font-semibold text-gray-800 dark:text-gray-200 flex items-center gap-2">
               <Trash2 className="w-5 h-5 text-rose-500" /> Waste Type
             </h3>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {Object.entries(wasteFactors).map(([key, val]) => {
                 const isSelected = selectedWaste === key;
                 const isGreen = val.factor < 0;

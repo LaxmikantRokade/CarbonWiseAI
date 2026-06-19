@@ -143,7 +143,7 @@ export default function Layout() {
               <button
                 aria-label="Close menu"
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
+                className="p-3 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg hover:bg-gray-100 dark:hover:bg-white/10 transition-colors cursor-pointer"
               >
                 <X size={20} className="text-gray-500" />
               </button>
@@ -185,7 +185,7 @@ export default function Layout() {
           <button
             aria-label="Open menu"
             onClick={() => setMobileMenuOpen(true)}
-            className="p-2 -ml-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10
+            className="p-3 min-h-[44px] min-w-[44px] flex items-center justify-center -ml-2 rounded-lg hover:bg-gray-100 dark:hover:bg-white/10
               transition-colors cursor-pointer"
           >
             <Menu size={20} className="text-gray-700 dark:text-gray-300" />
@@ -214,7 +214,7 @@ export default function Layout() {
         <nav className="md:hidden fixed bottom-0 left-0 right-0
           bg-white/80 dark:bg-carbon-900/80 backdrop-blur-xl
           border-t border-gray-200/50 dark:border-white/5
-          flex items-center z-20 safe-bottom">
+          flex items-center z-20 pb-[env(safe-area-inset-bottom)]">
 
           {mobileTabItems.map((item) => {
             const Icon = item.icon;
@@ -224,7 +224,7 @@ export default function Layout() {
                 to={item.to}
                 end={item.end}
                 className={({ isActive }) =>
-                  `flex-1 flex flex-col items-center gap-0.5 py-2 text-[10px] font-semibold
+                  `flex-1 flex flex-col items-center justify-center gap-0.5 py-3 min-h-[56px] text-[10px] font-semibold
                   transition-all duration-200
                   ${isActive
                     ? 'text-primary-500'
@@ -251,7 +251,7 @@ export default function Layout() {
               aria-label="More options"
               aria-expanded={moreMenuOpen}
               onClick={() => setMoreMenuOpen(!moreMenuOpen)}
-              className={`w-full flex flex-col items-center gap-0.5 py-2 text-[10px] font-semibold
+              className={`flex-1 flex flex-col items-center justify-center gap-0.5 py-3 min-h-[56px] w-full text-[10px] font-semibold
                 transition-all duration-200 cursor-pointer
                 ${moreMenuOpen ? 'text-primary-500' : 'text-gray-400 dark:text-gray-500'}`}
             >

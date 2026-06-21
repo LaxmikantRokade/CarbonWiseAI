@@ -41,7 +41,7 @@ function formatToday() {
 
 
 export default function Dashboard() {
-  console.log('[App Init] Dashboard.jsx rendered');
+
   if (window.logDebug) window.logDebug('Dashboard.jsx rendered');
   const { state } = useCarbon();
   const { t } = useTranslation();

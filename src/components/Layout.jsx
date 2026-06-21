@@ -32,7 +32,7 @@ const mobileTabItems = [
 ];
 
 export default function Layout() {
-  console.log('[App Init] Layout.jsx rendered');
+
   if (window.logDebug) window.logDebug('Layout.jsx rendered');
   const { state } = useCarbon();
   const { t } = useTranslation();

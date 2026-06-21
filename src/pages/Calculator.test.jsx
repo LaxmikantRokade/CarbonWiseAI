@@ -108,4 +108,36 @@ describe('Calculator Page', () => {
     const logBtn = screen.getByRole('button', { name: /Log /i });
     fireEvent.click(logBtn);
   });
+
+  it('allows interacting with food and waste inputs specifically', () => {
+    render(
+      <CarbonProvider>
+        <BrowserRouter>
+          <Calculator />
+        </BrowserRouter>
+      </CarbonProvider>
+    );
+
+    // Food Tab
+    fireEvent.click(screen.getByText('Food'));
+    
+    // Check diet preset first
+    const presetBtn = screen.getByText('Vegan');
+    fireEvent.click(presetBtn);
+
+    // Check individual food item
+    const beefBtn = screen.getByText('Beef');
+    fireEvent.click(beefBtn);
+
+    // Change food quantity
+    const foodQuantityInput = screen.getAllByRole('spinbutton')[0];
+    fireEvent.change(foodQuantityInput, { target: { value: '2' } });
+
+    // Waste Tab
+    fireEvent.click(screen.getByText('Waste'));
+
+    // Check waste selection
+    const glassBtn = screen.getByText('Glass Recycling');
+    fireEvent.click(glassBtn);
+  });
 });

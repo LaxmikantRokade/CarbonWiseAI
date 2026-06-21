@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import Tracker from './Tracker';
 import { CarbonProvider } from '../context/CarbonContext';
+import { BrowserRouter } from 'react-router-dom';
 
 // Mock Recharts to avoid testing SVG elements
 vi.mock('recharts', async () => {
@@ -90,5 +91,42 @@ describe('Tracker Page', () => {
     fireEvent.click(deleteBtn);
     
     expect(screen.getByText(/No entries yet/i)).toBeInTheDocument();
+  });
+  describe('Relative Time Formatting', () => {
+    it('formats relative times correctly', () => {
+      // Create instances for different time offsets
+      const now = new Date();
+      const minsAgo30s = new Date(now.getTime() - 1000 * 30);
+      const minsAgo5m = new Date(now.getTime() - 1000 * 60 * 5);
+      const hoursAgo2h = new Date(now.getTime() - 1000 * 60 * 60 * 2);
+      const daysAgo3d = new Date(now.getTime() - 1000 * 60 * 60 * 24 * 3);
+
+      const mockState = {
+        entries: [
+          { id: '1', date: minsAgo30s.toISOString(), category: 'transport', label: 'Entry 1', amount: 10 },
+          { id: '2', date: minsAgo5m.toISOString(), category: 'transport', label: 'Entry 2', amount: 10 },
+          { id: '3', date: hoursAgo2h.toISOString(), category: 'transport', label: 'Entry 3', amount: 10 },
+          { id: '4', date: daysAgo3d.toISOString(), category: 'transport', label: 'Entry 4', amount: 10 },
+        ],
+        goals: [],
+        unlockedAchievements: [],
+        streak: 0,
+        carbonScore: 80,
+      };
+      window.localStorage.setItem('carbonwise_state', JSON.stringify(mockState));
+
+      render(
+        <CarbonProvider>
+          <BrowserRouter>
+            <Tracker />
+          </BrowserRouter>
+        </CarbonProvider>
+      );
+
+      expect(screen.getByText(/Just now/i)).toBeInTheDocument();
+      expect(screen.getByText(/5m ago/i)).toBeInTheDocument();
+      expect(screen.getByText(/2h ago/i)).toBeInTheDocument();
+      expect(screen.getByText(/3d ago/i)).toBeInTheDocument();
+    });
   });
 });

@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { Component, memo } from 'react';
 import {
   PieChart, Pie, Cell,
@@ -25,7 +26,7 @@ if (typeof window !== 'undefined' && typeof window.ResizeObserver !== 'function'
   window.ResizeObserver = ResizeObserverPolyfill;
 }
 
-class ChartErrorBoundary extends Component {
+export class ChartErrorBoundary extends Component {
   constructor(props) {
     super(props);
     this.state = { hasError: false };
@@ -56,7 +57,7 @@ class ChartErrorBoundary extends Component {
 
 const defaultColors = ['#10b981', '#06b6d4', '#f59e0b', '#ef4444', '#8b5cf6', '#ec4899', '#3b82f6', '#f97316'];
 
-function GlassTooltip({ active, payload, label }) {
+export function GlassTooltip({ active, payload, label }) {
   if (!active || !payload?.length) return null;
 
   return (
@@ -79,7 +80,7 @@ function GlassTooltip({ active, payload, label }) {
   );
 }
 
-function renderPieLabel({ cx, cy, midAngle, innerRadius, outerRadius, percent }) {
+export function renderPieLabel({ cx, cy, midAngle, innerRadius, outerRadius, percent }) {
   const RADIAN = Math.PI / 180;
   const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);

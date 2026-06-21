@@ -28,7 +28,7 @@ function PageLoader() {
 }
 
 function App() {
-  console.log('[App Init] App.jsx rendered');
+
   if (window.logDebug) window.logDebug('App.jsx rendered');
   const location = useLocation();
 

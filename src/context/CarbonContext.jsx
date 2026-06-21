@@ -162,7 +162,7 @@ function carbonReducer(state, action) {
 }
 
 export function CarbonProvider({ children }) {
-  console.log('[App Init] CarbonProvider rendered');
+
   const [state, dispatch] = useReducer(carbonReducer, initialState, (initial) => {
     try {
       const saved = localStorage.getItem('carbonwise_state');

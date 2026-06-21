@@ -7,7 +7,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import './index.css';
 import './i18n';
 
-console.log('[App Init] main.jsx loaded');
+
 if (window.logDebug) window.logDebug('main.jsx loaded');
 
 createRoot(document.getElementById('root')).render(

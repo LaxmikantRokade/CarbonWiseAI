@@ -82,7 +82,6 @@ export default function Report() {
 
   const handleDownloadPDF = async () => {
     setIsGenerating(true);
-    console.log('--- PDF Capture Started ---');
     try {
       const html2canvas = (await import('html2canvas')).default;
       const jsPDF = (await import('jspdf')).default;
@@ -93,15 +92,12 @@ export default function Report() {
       // Temporarily remove animations to ensure correct capture
       const originalTransform = element.style.transform;
       element.style.transform = 'none';
-
-      console.log('Running html2canvas...');
       const canvas = await html2canvas(element, {
         scale: 2,
         useCORS: true,
         allowTaint: true,
         backgroundColor: '#ffffff',
         onclone: (doc, elementClone) => {
-          console.log('[html2canvas onclone] Sanitizing cloned DOM...');
 
           // 1. Remove SVG filters to prevent canvas tainting (fixes Safari DOMException)
           const svgs = elementClone.querySelectorAll('svg');
@@ -143,8 +139,6 @@ export default function Report() {
           const complexProps = ['boxShadow', 'textShadow', 'backgroundImage'];
 
           const allElements = [elementClone, ...elementClone.querySelectorAll('*')];
-          let sanitizedCount = 0;
-
           allElements.forEach(el => {
             const computed = doc.defaultView.getComputedStyle(el);
             if (!computed) return;
@@ -154,9 +148,7 @@ export default function Report() {
               const val = computed[prop];
               if (val && (val.includes('oklch') || val.includes('oklab') || val.includes('color('))) {
                 try {
-                  console.log(`[Unsupported Color Found] Element:`, el, `| Property: ${prop} | Value: ${val}`);
                   el.style[prop] = convertToRgb(val);
-                  sanitizedCount++;
                 } catch (e) {
                   console.warn(`[Sanitize Error] Failed to convert ${prop}: ${val}`, el, e);
                 }
@@ -168,24 +160,17 @@ export default function Report() {
               const val = computed[prop];
               if (val && val !== 'none' && (val.includes('oklch') || val.includes('oklab') || val.includes('color('))) {
                 try {
-                  console.log(`[Unsupported Complex Color Found] Element:`, el, `| Property: ${prop} | Value: ${val}`);
                   el.style[prop] = sanitizeColorString(val);
-                  sanitizedCount++;
                 } catch (e) {
                   console.warn(`[Sanitize Error] Failed to convert complex ${prop}: ${val}`, el, e);
                 }
               }
             });
           });
-
-          console.log(`[html2canvas onclone] Sanitization complete. Converted ${sanitizedCount} unsupported colors.`);
         }
       });
-      console.log('html2canvas success.');
 
       element.style.transform = originalTransform;
-
-      console.log('Generating jsPDF...');
       const imgData = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p', 'mm', 'a4');
       const imgWidth = 210;
@@ -206,9 +191,8 @@ export default function Report() {
 
       try {
         pdf.save('carbonwise-report.pdf');
-        console.log('jsPDF generation and save success.');
       } catch (e) {
-        console.log('pdf.save() blocked, using fallback blob download...', e);
+        console.warn('pdf.save() blocked, using fallback blob download...', e);
         const blob = pdf.output('blob');
         const url = URL.createObjectURL(blob);
         const link = document.createElement('a');
@@ -218,9 +202,7 @@ export default function Report() {
         link.click();
         document.body.removeChild(link);
         URL.revokeObjectURL(url);
-        console.log('Fallback jsPDF download success.');
       }
-      console.log('--- PDF Capture Finished ---');
     } catch (err) {
       console.error('--- PDF Capture Failed ---');
       console.error('Error details:', err);
